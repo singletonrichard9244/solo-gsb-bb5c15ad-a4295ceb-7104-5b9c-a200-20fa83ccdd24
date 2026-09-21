@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    image: sample-lineage-api
+    ports:
+      - "8000:8000"
+    environment:
+      # SQLite 数据库文件位置（容器内路径，挂载卷持久化）
+      DATABASE_URL: sqlite:////data/lineage.db
+      HOST: 0.0.0.0
+      PORT: 8000
+    volumes:
+      - lineage-data:/data
+    restart: unless-stopped
+
+volumes:
+  lineage-data:
